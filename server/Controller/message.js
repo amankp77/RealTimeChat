@@ -4,7 +4,7 @@ const {Conversations} = require('../Models/conversation')
 
 const addMessage = async (req,res)=>{
         const message = req.body;
-        console.log(message);
+        
         const data = await Messages.create(message);
         await Conversations.findByIdAndUpdate(message.conversationId, {message : message.text})
 
