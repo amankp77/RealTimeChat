@@ -78,7 +78,7 @@ const Conversation = ({ user }) => {
         </Container>
         <Box>
           <Text>
-            {message?.text?.includes("whatsapp-clone-roan.vercel.app") ? "media" : message.text}
+            {message?.text?.includes("whatsapp-clone-production-77a4.up.railway.app") ? "media" : message.text}
           </Text>
         </Box>
       </Box>
