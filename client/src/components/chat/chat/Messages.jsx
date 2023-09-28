@@ -34,7 +34,7 @@ const Messages = ({ conversation }) => {
   const scrollRef = useRef();
 
   const sendMessage = async (e) => {
-    if (e.which == 13) {
+    if (e.which == 13 && text!="") {
       let message;
       if(!file){
         message = {
