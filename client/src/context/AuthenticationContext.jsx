@@ -14,7 +14,7 @@ const AuthenticationComponent = ({children}) => {
   const socket = useRef();
   
   useEffect(() => {
-      socket.current = io('ws://localhost:9000');
+      socket.current = io('https://whatsapp-clone-production-1a0a.up.railway.app/');
   }, [])
   const [account, setAccount] = useState(null)
   const [person, setPerson] = useState({})
