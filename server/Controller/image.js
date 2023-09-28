@@ -1,7 +1,9 @@
 const grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
-const url = 'http://localhost:6969';
+const url = "https://whatsapp-clone-production-77a4.up.railway.app"
+
+// const url = 'http://localhost:6969';
 
 
 let gfs, gridfsBucket;

@@ -1,6 +1,6 @@
 import axios from 'axios'
-// const URL = "https://whatsapp-clone-production-77a4.up.railway.app"
-const URL = "http://localhost:6969" 
+const URL = "https://whatsapp-clone-production-77a4.up.railway.app"
+// const URL = "http://localhost:6969" 
 
 
 const addUser = async (user)=>{
