@@ -20,6 +20,7 @@ const addUser = async (req,res)=>{
 }
 
 const getUser = async ( req,res)=>{
+    console.log("Got User");
     try{
         const response = await User.find({});
         res.json(response);

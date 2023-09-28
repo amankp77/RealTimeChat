@@ -25,6 +25,8 @@ route.post('/message/add',addMessage)
 route.post('/file/upload', upload.single('file'), uploadImage);
 route.get('/file/:filename', getImage);
 
+
+
 ;
 
 module.exports = route
