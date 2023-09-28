@@ -1,36 +1,50 @@
-import { useContext} from 'react';
+import { useState,useContext, useEffect} from 'react';
 
 import { Box } from '@mui/material';
 
 // import { UserContext } from '../../../context/UserProvider';
-// import { AuthenticationContext } from '../../../context/AuthenticationContext';
-// import { getConversation } from '../../../service/api';
+import { AuthenticationContext } from '../../../context/AuthenticationContext';
+import { getConversation } from '../../../services/api';
 
 //components
 import ChatHeader from './ChatHeader';
 import Messages from './Messages';
-import Footer from './Footer';
+import EmptyChat from './EmptyChat';
+import styled from '@emotion/styled';
+
+
+const Wrapper = styled(Box)({
+    height : '75%',
+    width:'100%'
+})
+
 
 const ChatBox = () => {
     
-    // const { account } = useContext(AccountContext);
+    const { account ,person} = useContext(AuthenticationContext);
 
-    // const [conversation, setConversation] = useState({});
+    const [conversation, setConversation] = useState({});
     
-    // useEffect(() => {
-    //     const getConversationDetails = async () => {
-    //         let data = await getConversation({ senderId: account.sub, receiverId: person.sub });
-    //         setConversation(data);
-    //     }
-    //     getConversationDetails();
-    // }, [person.sub]);
+
+   
+    
+    useEffect(()=>{
+    const personHandler = async () => {
+        
+        const data = await getConversation({ senderId: account.sub, recieverId: person.sub });
+        setConversation(data);
+       
+    }
+    personHandler();
+},[person.sub])
+
 
     return (
-        <Box style={{height: '75%'}}>
-            <ChatHeader />
-            <Messages />
-            <Footer/>
-        </Box>
+        <Wrapper>
+            {conversation && <ChatHeader />}
+            {conversation?<Messages conversation = {conversation}/> : <EmptyChat/>}
+           
+        </Wrapper>
     )
 }
 

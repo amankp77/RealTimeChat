@@ -17,4 +17,29 @@ const setConversation = async (convo)=>{
        return response.data;
 }
 
-export {addUser,getUsers,setConversation}
+const getConversation = async(bothIDs)=>{
+      const response = await axios.get(`${URL}/conversation/get`, {
+       params : bothIDs
+      })
+      return response.data;
+}
+
+const addMessage = async(message)=>{
+        const response = await axios.post(`${URL}/message/add`, message)
+        return response.data;
+}
+
+const getMessages = async(id)=>{
+       const response = await axios.get(`${URL}/message/get/${id}`)
+       
+       return response.data;
+}
+
+const uploadFile = async (data) => {
+       try {
+           return await axios.post(`${URL}/file/upload`, data);
+       } catch (error) {
+           console.log('Error while calling newConversations API ', error);
+       }
+   }
+export {addUser,getUsers,setConversation,getConversation,addMessage,getMessages,uploadFile}

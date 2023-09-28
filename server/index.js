@@ -1,23 +1,29 @@
-const express = require('express');
-const {startDB} = require('./database/db')
-const bodyParser = require('body-parser')
-const  cors = require('cors');
+// import express from 'express';
+const express = require('express')
+// import bodyParser from 'body-parser';
+const bodyParser = require('body-parser');
+// import cors from 'cors';
+const cors = require('cors');
+// import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 
+const route = require('./Routes/route.js')
+const {startDB} = require('./database/db.js')
 
-const route = require('./Routes/route');
+
+dotenv.config();
 const app = express();
 
-//Middleware
+const PORT = 6969;
+
+
+
+startDB();
+
+app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
+
+app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-app.use('/',route);
-
-
-
-app.listen(6969,async ()=>{
-    console.log("Server is running on 6969");
-    await startDB()
-})
-
+app.use('/', route);

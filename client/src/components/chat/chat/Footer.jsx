@@ -1,12 +1,15 @@
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
 
 import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
 import { Box, styled, InputBase } from '@mui/material';
+import {uploadFile} from '../../../services/api'
 
 const Container = styled(Box)`
     height: 55px;
+    position:absolute;
+    bottom : 0px;
+    width: -webkit-fill-available;
     background: #ededed;
-    width: 100%;
     display: flex;
     align-items: center;
     padding: 0 15px;
@@ -36,19 +39,50 @@ const ClipIcon = styled(AttachFile)`
 `;
 
 
-const Footer = () => {
+const Footer = ({sendMessage,setMessage, message, file, setFile,setImage}) => {
+   
+
+    useEffect(() => {
+        const getImage = async () => {
+            if (file) {
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
+
+                const response = await uploadFile(data);
+                setImage(response.data);
+            }
+        }
+        getImage();
+    }, [file])
 
 
+    const setFileHandler = (e)=>{
+       
+        setFile(e.target.files[0]);
+        setMessage(e.target.files[0].name);
+        console.log(file);
+    }
+   
     return (
         <Container>
             <EmojiEmotions />
-            {/* <label htmlFor="fileInput"> */}
+            <label htmlFor="fileInput">
             <ClipIcon />
-            {/* </label> */}
+            <input type='file'
+                id='fileInput'
+                style={{
+                    display:'none'
+                }}
+                onChange={setFileHandler}
+            />
+            </label>
            
 
             <Search>
-                <InputField placeholder='This is Message'/>
+                <InputField placeholder='This is Message' onChange={(e)=>{setMessage(e.target.value)}}
+                    onKeyUp={sendMessage} value={message}
+                />
             </Search>
             <Mic />
         </Container>
