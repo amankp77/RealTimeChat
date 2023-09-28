@@ -54,7 +54,9 @@ const Messages = ({ conversation }) => {
           text: image,
         }
       }
+  
 
+      console.log("IMAGECHECK",message);
 
       socket.current.emit('sendMessage', message);
 

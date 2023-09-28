@@ -91,6 +91,7 @@ const ImageMessage = ({ message }) => {
           </Typography>
         </div>
       ) : (
+       
         <img
           style={{ width: 300, height: "100%", objectFit: "cover" }}
           src={message.text}

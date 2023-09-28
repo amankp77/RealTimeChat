@@ -51,6 +51,7 @@ const Footer = ({sendMessage,setMessage, message, file, setFile,setImage}) => {
 
                 const response = await uploadFile(data);
                 setImage(response.data);
+                
             }
         }
         getImage();
